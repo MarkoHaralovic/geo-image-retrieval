@@ -14,8 +14,8 @@ Our objective is to identify the most visually/spatially relevant matches for ea
 
 We explore several retrieval paradigms:
 
-1. **Bag-of-Words (BoW)** models using handcrafted local descriptors — **ORB**, **SURF**, and **SIFT** — combined with clustering and TF-IDF weighting.  
-2. **Zero-shot linear probing** of pretrained backbones — **DINOv3**, **Perception Encoder**, **CLIP**, and **StreetCLIP** — using different **feature pooling** strategies (CLS, mean, mean without CLS token, max, and GeM).  We ablte pooling strategy performances.
+1. **Bag-of-Words (BoW)** models using handcrafted local descriptors : **ORB**, **SURF**, and **SIFT**; combined with clustering and TF-IDF weighting.  
+2. **Zero-shot linear probing** of pretrained backbones: **DINOv3**, **Perception Encoder**, **CLIP**, and **StreetCLIP**, while using different **feature pooling** strategies (CLS, mean, mean without CLS token, max, and GeM).  We ablte pooling strategy performances.
 3. **GPS-aided search**, where gallery features are grouped by their geolocation and represented by centroid embeddings.  
 4. **Hybrid backbones**, where features from multiple models (DINOv3-H/16+ and CLIP-B/32) are concatenated to explore combined prformance.  
 
@@ -69,7 +69,7 @@ The classical BoW pipeline serves as a historical baseline:
 
 ## Zero-Shot Linear Probing
 
-We benchmark modern visual backbones in a **zero-shot** setup—no fine-tuning, just feature extraction and similarity search.
+We benchmark modern visual backbones in a **zero-shot** setup, wuthout fine-tuning, just feature extraction and similarity search.
 
 - **Models tested:** DINOv3 (ViT and ConvNeXt variants), Perception Encoder, CLIP, StreetCLIP  
 - **Similarity metric:** cosine distance  
