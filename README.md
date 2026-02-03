@@ -16,8 +16,8 @@ We explore several retrieval paradigms:
 
 1. **Bag-of-Words (BoW)** models using handcrafted local descriptors : **ORB**, **SURF**, and **SIFT**; combined with clustering and TF-IDF weighting.  
 2. **Zero-shot linear probing** of pretrained backbones: **DINOv3**, **Perception Encoder**, **CLIP**, and **StreetCLIP**, while using different **feature pooling** strategies (CLS, mean, mean without CLS token, max, and GeM).  We ablte pooling strategy performances.
-3. **GPS-aided search**, where gallery features are grouped by their geolocation and represented by centroid embeddings.  
-4. **Hybrid backbones**, where features from multiple models (DINOv3-H/16+ and CLIP-B/32) are concatenated to explore combined prformance.  
+3. **GPS based search**, where gallery features are grouped by their geolocation and represented by centroid embeddings. Assuming GPS is knows for the gallery.
+4. **Ensamble of backbones**, where features from multiple models (DINOv3-H/16+ and CLIP-B/32) are concatenated to explore combined prformance.  
 
 Evaluation relies on **Recall@K** (K = 1, 5, 10, 20) and **mAP@K**.
 
@@ -40,7 +40,7 @@ Success is measured by how often the correct location appears in the top-K retri
 
 ## Baseline: Bag-of-Words (BoW)
 
-The classical BoW pipeline serves as a historical baseline:
+The classical BoW pipeline serves as a (historical) baseline:
 
 1. Extract local descriptors (ORB, SURF, or SIFT).  
 2. Learn a **visual vocabulary** via K-means clustering.  
@@ -133,16 +133,16 @@ We benchmark modern visual backbones in a **zero-shot** setup, wuthout fine-tuni
 
 ---
 
-### Multi-Backbone Combination
+### Multi-backbone combination
 | Combination | R@1 | R@5 | R@10 | R@20 |
 |--------------|----:|----:|-----:|-----:|
 | **DINOv3-H/16+ + CLIP-B/32** | **44.8** | **66.6** | **76.0** | 85.0 |
 
 ---
 
-## GPS-Aided Retrieval
+## GPS based retrieval
 
-To exploit spatial context, gallery features were clustered based on their GPS coordinates, creating centroid embeddings representing approximate locations. During retrieval, the similarity score blends direct image similarity with centroid proximity.
+To use spatial context, gallery features were clustered based on their GPS coordinates, creating centroid embeddings representing approximate locations. During retrieval, the similarity score blends direct image similarity with centroid proximity.
 Formula we used here was:
 
 <img width="279" height="36" alt="image" src="https://github.com/user-attachments/assets/98b859df-2bd9-4274-aefe-3a0504c35fd7" />
@@ -169,10 +169,10 @@ where q is the query image, I_i is a gallery image, c_j is the matched centroid,
 
 ## Conclusions
 
-- The **SIFT-based BoW** approach reaches only **13.2 % Recall@1**.  
-- **DINOv3-H/16+ (GeM pooling)** yields  **44 % Recall@1** out of the box.  
+- The **SIFT BoW** approach reaches only **13.2 % Recall@1**.  
+- **DINOv3-H/16+ (GeM pooling)** reaches **44 % Recall@1** out of the box.  
 - **Combining DINOv3 and CLIP** features adds a modest improvement (44.8 %).  
-- Incorporating **GPS priors** further refines retrieval performance with **46.4 % Recall@1**.  
+- Incorporating **GPS priors** further improves retrieval performance with **46.4 % Recall@1**.  
 - Across all architectures, **GeM pooling** consistently offers the most reliable embeddings.
 
 ---
