@@ -1,6 +1,8 @@
 # Foundational Models for Zero-Shot Image Retrieval  
 **Evaluation on the MSLS London Subset**
 
+[Article](https://github.com/MarkoHaralovic/geo-image-retrieval/blob/main/article/foundational_models_in_ir.pdf)
+
 ## Overview
 
 This study examines how **foundation models** can perform **visual place recognition** without additional training, using the **Mapillary Street-Level Sequences (MSLS)** dataset. We focus on the **London** subset, where the task is to match query images to their corresponding locations in a gallery of geotagged photos.
